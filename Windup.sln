@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windup.SerialTalker", "Windup.SerialTalker\Windup.SerialTalker.csproj", "{2453B3F5-E8E9-403D-A442-2034E27DE6B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windup.ConsoleTest", "Windup.ConsoleTest\Windup.ConsoleTest.csproj", "{335E82E9-F896-4204-9979-95FAE813A166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windup.ExecuteEngine", "Windup.ExecuteEngine\Windup.ExecuteEngine.csproj", "{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Debug|x86.Build.0 = Debug|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Release|x86.ActiveCfg = Release|Any CPU
+		{2453B3F5-E8E9-403D-A442-2034E27DE6B7}.Release|x86.Build.0 = Release|Any CPU
+		{335E82E9-F896-4204-9979-95FAE813A166}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Debug|x86.ActiveCfg = Debug|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Debug|x86.Build.0 = Debug|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Release|Any CPU.ActiveCfg = Release|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Release|Mixed Platforms.Build.0 = Release|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Release|x86.ActiveCfg = Release|x86
+		{335E82E9-F896-4204-9979-95FAE813A166}.Release|x86.Build.0 = Release|x86
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F040CF4B-B4EA-40D4-9F9F-B9CC2141BB88}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Windup.ConsoleTest\Windup.ConsoleTest.csproj
+	EndGlobalSection
+EndGlobal
