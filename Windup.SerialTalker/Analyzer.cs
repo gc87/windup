@@ -5,27 +5,27 @@ using System.Text;
 
 namespace Windup.SerialTalker
 {
+	public enum LineBreak
+	{
+		Linux, //"\n"
+		Mac, //"\r"
+		Nt, //"\r\n"
+		Length, //length
+		Char //char
+	};
+
+	public enum ChangeFlag
+	{
+		Succeed,
+		Failed
+	}
+
     class Analyzer
     {
-        public enum NewLine
-        {
-            Linux, //n
-            Mac, //r
-            Nt, //rn
-            Length, //length
-            Char //char
-        };
-
-        public enum ChangeFlag
-        {
-            Succeed,
-            Failed
-        }
-
         private delegate bool IsLineBreak(byte what);
         private IsLineBreak _isLineBreak;
         private SerialAgent _sa;
-        private NewLine _newLine;
+        private LineBreak _lineBreak = 0;
         private byte? _preByte;
         private int _index = 0;
         private long? _length = null;
@@ -51,14 +51,19 @@ namespace Windup.SerialTalker
         {
         }
 
+		/// <summary>
+		/// 数据到达时候的事件处理函数.
+		/// </summary>
+		/// <param name="o">O.</param>
+		/// <param name="e">E.</param>
         void OnDataRxEvent(object o, DataRxEventArgs e)
         {
             if (_isLineBreak(e.Data)) {
                 _index = 0;
                 _preByte = null;
-                if (NewLine.Nt == _newLine)
+                if (LineBreak.Nt == _lineBreak)
                     _list.RemoveAt(_list.Count - 1);
-                if (NewLine.Length == _newLine)
+                if (LineBreak.Length == _lineBreak)
                     _list.Add(e.Data);
                 DataListReadyEvent(this, new DataListReadyEventArgs(_list));
                 _list = new List<byte>();
@@ -69,6 +74,11 @@ namespace Windup.SerialTalker
             }
         }
 
+		/// <summary>
+		/// 设置SerialAgent
+		/// </summary>
+		/// <returns>The agent.</returns>
+		/// <param name="sa">Sa.</param>
         public ChangeFlag SetAgent(SerialAgent sa)
         {
             try {
@@ -79,35 +89,36 @@ namespace Windup.SerialTalker
                 _sa = sa;
                 sa.AgentOpen();
                 sa.DataRxEvent += OnDataRxEvent;
-            } catch (Exception ex) {
+            } catch /*(Exception ex)*/ {
                 return ChangeFlag.Failed;
             }
             return ChangeFlag.Succeed;
         }
 
-        public ChangeFlag SetNewLine(NewLine newLine, long? length, char? breakChar)
-        {
-            _newLine = newLine;
-            return SetBreakLineMethod(newLine, length, breakChar);
-        }
-
-        ChangeFlag SetBreakLineMethod(NewLine newLine, long? length, char? breakChar)
+		/// <summary>
+		/// 设置断句函数.
+		/// </summary>
+		/// <returns>The break line.</returns>
+		/// <param name="LineBreak">New line.</param>
+		/// <param name="length">Length.</param>
+		/// <param name="breakChar">Break char.</param>
+        public ChangeFlag SetLineBreak(LineBreak LineBreak, long? length, char? breakChar)
         {
             var flag = ChangeFlag.Succeed;
-            switch (newLine) {
-                case NewLine.Nt: //Windows Nt
+            switch (LineBreak) {
+                case LineBreak.Nt: //Windows Nt
                     _isLineBreak = IsLineBreakForNt;
                     break;
 
-                case NewLine.Linux: //Linux
+                case LineBreak.Linux: //Linux
                     _isLineBreak = IsLineBreakForLinux;
                     break;
 
-                case NewLine.Mac: //Mac
+                case LineBreak.Mac: //Mac
                     _isLineBreak = IsLineBreakForMac;
                     break;
 
-                case NewLine.Length: //stream length
+                case LineBreak.Length: //stream length
                     if (null != length) {
                         _index = 0;
                         _length = length.Value;
@@ -117,7 +128,7 @@ namespace Windup.SerialTalker
                     }
                     break;
 
-                case NewLine.Char: //break char
+                case LineBreak.Char: //break char
                     if (null != breakChar) {
                         _breakChar = breakChar;
                         _isLineBreak = IsLineBreakForChar;
@@ -134,27 +145,52 @@ namespace Windup.SerialTalker
         }
 
 
+		/// <summary>
+		/// 是否通过NT系统的回车符断句.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is line break for nt the specified what; otherwise, <c>false</c>.</returns>
+		/// <param name="what">What.</param>
         bool IsLineBreakForNt(byte what)
         {
             if (_preByte == null || 13 != (int)_preByte) return false;
             return 10 == what;
         }
 
+		/// <summary>
+		/// 是否通过linux的回车符断句.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is line break for linux the specified what; otherwise, <c>false</c>.</returns>
+		/// <param name="what">What.</param>
         bool IsLineBreakForLinux(byte what)
         {
             return 10 == what;
         }
 
+		/// <summary>
+		///  是否通过Mac的回车符断句.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is line break for mac the specified what; otherwise, <c>false</c>.</returns>
+		/// <param name="what">What.</param>
         bool IsLineBreakForMac(byte what)
         {
             return 13 == what;
         }
 
+		/// <summary>
+		/// 是否通过字节长度断句.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is line break for length the specified what; otherwise, <c>false</c>.</returns>
+		/// <param name="what">What.</param>
         bool IsLineBreakForLength(byte what)
         {
             return _length == _index;
         }
 
+		/// <summary>
+		/// 是否通过字符标志断句.
+		/// </summary>
+		/// <returns><c>true</c> if this instance is line break for char the specified what; otherwise, <c>false</c>.</returns>
+		/// <param name="what">What.</param>
         bool IsLineBreakForChar(byte what)
         {
             return what == _breakChar;
