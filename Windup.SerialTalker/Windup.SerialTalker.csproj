@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2453B3F5-E8E9-403D-A442-2034E27DE6B7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -50,6 +48,7 @@
     <Compile Include="SerialAgent.cs" />
     <Compile Include="SerialList.cs" />
     <Compile Include="WriteFlagEnum.cs" />
+    <Compile Include="Talker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Analyzers\" />
