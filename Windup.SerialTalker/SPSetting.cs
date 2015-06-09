@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Windup.SerialTalker
 {
-    public class AgentSetting
+    public class SPSetting
     {
         public string PortName { get; set; }
         public int BaudRate { get; set; }
@@ -14,7 +14,7 @@ namespace Windup.SerialTalker
         public int DataBits { get; set; }
         public StopBits StopBits { get; set; }
 
-        public AgentSetting()
+        public SPSetting()
         {
             PortName = string.Empty;
             BaudRate = 9600;

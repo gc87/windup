@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Windup.SerialTalker
 {
-    public static class AgentGenerator
+    static class AgentGenerator
     {
-        public static SerialAgent CreateAgent(AgentSetting setting)
+		
+		public static SerialAgent CreateAgent(SPSetting setting)
         {
             Debug.Assert(null != setting);
             var sa = new SerialAgent() {
@@ -21,7 +22,7 @@ namespace Windup.SerialTalker
             return sa;
         }
 
-        public static IEnumerable<SerialAgent> CreateAgents(IEnumerable<AgentSetting> settings)
+		public static IEnumerable<SerialAgent> CreateAgents(IEnumerable<SPSetting> settings)
         {
             var list = new List<SerialAgent>();
             foreach (var sa in settings.Select(setting => new SerialAgent(

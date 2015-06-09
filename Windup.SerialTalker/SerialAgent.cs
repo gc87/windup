@@ -5,7 +5,14 @@ using System.Threading;
 
 namespace Windup.SerialTalker
 {
-    public sealed class SerialAgent
+	enum WriteFlagEnum
+	{
+		Successed = 0,
+		NotOpen = 1,
+		Exception = 2,
+	}
+	
+    sealed class SerialAgent
     {
         readonly SerialPort _serial;
         Thread _readRunner;

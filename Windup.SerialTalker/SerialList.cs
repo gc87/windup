@@ -6,7 +6,7 @@ using System.IO.Ports;
 
 namespace Windup.SerialTalker
 {
-    public class SerialList
+    class SerialList
     {
         public static string[] ReturnSerialList()
         {
@@ -15,7 +15,7 @@ namespace Windup.SerialTalker
             {
                 allSerial = SerialPort.GetPortNames();
             }
-            catch (Exception e)
+            catch /*(Exception e)*/
             {
                 //throw new Exception(e.Message);
                 return null;

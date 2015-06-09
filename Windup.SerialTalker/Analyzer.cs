@@ -5,15 +5,6 @@ using System.Text;
 
 namespace Windup.SerialTalker
 {
-	public enum LineBreak
-	{
-		Linux, //"\n"
-		Mac, //"\r"
-		Nt, //"\r\n"
-		Length, //length
-		Char //char
-	};
-
 	public enum ChangeFlag
 	{
 		Succeed,
@@ -25,7 +16,7 @@ namespace Windup.SerialTalker
         private delegate bool IsLineBreak(byte what);
         private IsLineBreak _isLineBreak;
         private SerialAgent _sa;
-        private LineBreak _lineBreak = 0;
+        private LineBreak _lineBreak;
         private byte? _preByte;
         private int _index = 0;
         private long? _length = null;
@@ -41,15 +32,26 @@ namespace Windup.SerialTalker
 
         public event EventHandler<DataListReadyEventArgs> DataListReadyEvent;
 
+		/*
         protected virtual void OnDataListReadyEvent(DataListReadyEventArgs e)
         {
             EventHandler<DataListReadyEventArgs> handler = DataListReadyEvent;
             if (handler != null) handler(this, e);
         }
+*/
 
         public Analyzer()
         {
         }
+
+		public Analyzer(SerialAgent sa)
+		{
+			if (null == sa) {
+				throw new ArgumentNullException();
+			}
+			_sa = sa;
+			SetAgent(_sa);
+		}
 
 		/// <summary>
 		/// 数据到达时候的事件处理函数.
@@ -61,9 +63,9 @@ namespace Windup.SerialTalker
             if (_isLineBreak(e.Data)) {
                 _index = 0;
                 _preByte = null;
-                if (LineBreak.Nt == _lineBreak)
+				if ("nt" == _lineBreak.Type)
                     _list.RemoveAt(_list.Count - 1);
-                if (LineBreak.Length == _lineBreak)
+				if ("length" == _lineBreak.Type)
                     _list.Add(e.Data);
                 DataListReadyEvent(this, new DataListReadyEventArgs(_list));
                 _list = new List<byte>();
@@ -100,50 +102,48 @@ namespace Windup.SerialTalker
 		/// </summary>
 		/// <returns>The break line.</returns>
 		/// <param name="LineBreak">New line.</param>
-		/// <param name="length">Length.</param>
-		/// <param name="breakChar">Break char.</param>
-        public ChangeFlag SetLineBreak(LineBreak LineBreak, long? length, char? breakChar)
-        {
-            var flag = ChangeFlag.Succeed;
-            switch (LineBreak) {
-                case LineBreak.Nt: //Windows Nt
-                    _isLineBreak = IsLineBreakForNt;
-                    break;
+		public ChangeFlag SetLineBreak(LineBreak lineBreak)
+		{
+			var flag = ChangeFlag.Succeed;
+			_lineBreak = lineBreak;
+			switch (lineBreak.Type) {
+			case "nt": //Windows Nt
+				_isLineBreak = IsLineBreakForNt;
+				break;
 
-                case LineBreak.Linux: //Linux
-                    _isLineBreak = IsLineBreakForLinux;
-                    break;
+			case "linux": //Linux
+				_isLineBreak = IsLineBreakForLinux;
+				break;
 
-                case LineBreak.Mac: //Mac
-                    _isLineBreak = IsLineBreakForMac;
-                    break;
+			case "mac": //Mac
+				_isLineBreak = IsLineBreakForMac;
+				break;
 
-                case LineBreak.Length: //stream length
-                    if (null != length) {
-                        _index = 0;
-                        _length = length.Value;
-                        _isLineBreak = IsLineBreakForLength;
-                    } else {
-                        flag = ChangeFlag.Failed;
-                    }
-                    break;
+			case "length": //stream length
+				if (null != lineBreak.Length) {
+					_index = 0;
+					_length = lineBreak.Length.Value;
+					_isLineBreak = IsLineBreakForLength;
+				} else {
+					flag = ChangeFlag.Failed;
+				}
+				break;
 
-                case LineBreak.Char: //break char
-                    if (null != breakChar) {
-                        _breakChar = breakChar;
-                        _isLineBreak = IsLineBreakForChar;
-                    } else {
-                        flag = ChangeFlag.Failed;
-                    }
-                    break;
+			case "char": //break char
+				if (null != lineBreak.Char) {
+					_breakChar = lineBreak.Char;
+					_isLineBreak = IsLineBreakForChar;
+				} else {
+					flag = ChangeFlag.Failed;
+				}
+				break;
 
-                default:
-                    flag = ChangeFlag.Failed;
-                    break;
-            }
-            return flag;
-        }
-
+			default:
+				flag = ChangeFlag.Failed;
+				break;
+			}
+			return flag;
+		}
 
 		/// <summary>
 		/// 是否通过NT系统的回车符断句.
