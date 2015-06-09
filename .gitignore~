@@ -7,7 +7,6 @@
 /*.userprefs
 /*.suo
 
-
 /Windup.SerialTalkerTest/test-results/*.test-cache
 
 Windup.sln.DotSettings.user
