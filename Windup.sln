@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windup.SerialTalker", "Windup.SerialTalker\Windup.SerialTalker.csproj", "{2453B3F5-E8E9-403D-A442-2034E27DE6B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windup.SerialTalkerTest", "Windup.SerialTalkerTest\Windup.SerialTalkerTest.csproj", "{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windup.Main", "Windup.Main\Windup.Main.csproj", "{2F322824-721B-4784-B308-C206D5240624}"
 EndProject
 Global
@@ -43,18 +41,6 @@ Global
 		{2F322824-721B-4784-B308-C206D5240624}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2F322824-721B-4784-B308-C206D5240624}.Release|x86.ActiveCfg = Release|Any CPU
 		{2F322824-721B-4784-B308-C206D5240624}.Release|x86.Build.0 = Release|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Debug|x86.Build.0 = Debug|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Release|x86.ActiveCfg = Release|Any CPU
-		{8D734CA4-2F77-4EED-A6DD-7DF9E31BB196}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
