@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Windup.SerialTalker
 {
-	public enum ChangeFlag
+	enum ChangeFlag
 	{
 		Succeed,
 		Failed
