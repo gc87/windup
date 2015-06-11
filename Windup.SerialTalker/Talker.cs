@@ -125,5 +125,16 @@ namespace Windup.SerialTalker
 			}
 			return allSerial;
 		}
+
+		/// <summary>
+		/// Touchs the agent port.
+		/// </summary>
+		/// <returns><c>true</c>, if agent port was touched, <c>false</c> otherwise.</returns>
+		/// <param name="portName">Port name.</param>
+		/// <param name="baudRate">Baud rate.</param>
+		public static bool TouchAgentPort(string portName, int baudRate)
+		{
+			return SerialAgent.TouchAgentPort (portName, baudRate);
+		}
 	}
 }
