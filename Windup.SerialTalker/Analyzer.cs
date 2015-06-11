@@ -89,8 +89,8 @@ namespace Windup.SerialTalker
                     _sa.AgentClose();
                 }
                 _sa = sa;
-                sa.AgentOpen();
-                sa.DataRxEvent += OnDataRxEvent;
+                _sa.AgentOpen();
+                _sa.DataRxEvent += OnDataRxEvent;
             } catch /*(Exception ex)*/ {
                 return ChangeFlag.Failed;
             }
@@ -107,15 +107,15 @@ namespace Windup.SerialTalker
 			var flag = ChangeFlag.Succeed;
 			_lineBreak = lineBreak;
 			switch (lineBreak.Type) {
-			case "nt": //Windows Nt
+			case "nt": //Windows Nt "\r\n"
 				_isLineBreak = IsLineBreakForNt;
 				break;
 
-			case "linux": //Linux
+			case "linux": //Linux "\n"
 				_isLineBreak = IsLineBreakForLinux;
 				break;
 
-			case "mac": //Mac
+			case "mac": //Mac "\r"
 				_isLineBreak = IsLineBreakForMac;
 				break;
 
