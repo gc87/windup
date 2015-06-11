@@ -13,6 +13,7 @@ namespace Windup.SerialTalker
 
     class Analyzer
     {
+        public event EventHandler<DataListReadyEventArgs> DataListReadyEvent;
         private delegate bool IsLineBreak(byte what);
         private IsLineBreak _isLineBreak;
         private SerialAgent _sa;
@@ -30,28 +31,9 @@ namespace Windup.SerialTalker
             }
         }
 
-        public event EventHandler<DataListReadyEventArgs> DataListReadyEvent;
-
-		/*
-        protected virtual void OnDataListReadyEvent(DataListReadyEventArgs e)
-        {
-            EventHandler<DataListReadyEventArgs> handler = DataListReadyEvent;
-            if (handler != null) handler(this, e);
-        }
-*/
-
         public Analyzer()
         {
         }
-
-		public Analyzer(SerialAgent sa)
-		{
-			if (null == sa) {
-				throw new ArgumentNullException();
-			}
-			_sa = sa;
-			SetAgent(_sa);
-		}
 
 		/// <summary>
 		/// 数据到达时候的事件处理函数.
@@ -89,8 +71,8 @@ namespace Windup.SerialTalker
                     _sa.AgentClose();
                 }
                 _sa = sa;
-                _sa.AgentOpen();
                 _sa.DataRxEvent += OnDataRxEvent;
+                _sa.AgentOpen();
             } catch /*(Exception ex)*/ {
                 return ChangeFlag.Failed;
             }
