@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO.Ports;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Windup.SerialTalker
 {
@@ -9,73 +10,99 @@ namespace Windup.SerialTalker
 	{
 		//处理到达数据的回调函数，Talker的最核心的处理
 		public delegate void ByteListProc (List<byte> bytes);
+		public bool IsOpen = false;
 
 		ByteListProc _byteListProc;
 
 		SerialAgent _sa;
 		Analyzer _analyzer;
+		LineBreak _lineBreak;
 
-		public Talker ()
+		public Talker()
 		{
-			LineBreak = new LineBreak () {
-				Type = "linux"
+			PortName = " "; //whitespace
+			BaudRate = 9600;
+			Parity = Parity.None;
+			DataBits = 8;
+			StopBits = StopBits.One;
+			_lineBreak = new LineBreak{ Type = "linux"};
+			_byteListProc += list => {
 			};
+		}
 
-			_sa = new SerialAgent ("INIT");
+		/// <summary>
+		/// Open this instance.
+		/// </summary>
+		public void Open(){
+			_sa = new SerialAgent (PortName, BaudRate, Parity, DataBits, StopBits);
 			_analyzer = new Analyzer ();
-			_analyzer.SetLineBreak (LineBreak);
+			_analyzer.SetLineBreak (_lineBreak);
 			_analyzer.DataListReadyEvent += OnDataListReady;
+			_analyzer.SetAgent (_sa);
+			IsOpen = true;
 		}
 
+		/// <summary>
+		/// Close this instance.
+		/// </summary>
+		public void Close()
+		{
+			if (!IsOpen) {
+				return;
+			}
+			_sa.AgentClose ();
+			IsOpen = false;
+		}
+
+		/// <summary>
+		/// Gets or sets the name of the port.
+		/// </summary>
+		/// <value>The name of the port.</value>
 		public string PortName {
-			get { 
-				return _sa.AgentPortName;
-			}
-			set { 
-				_sa.AgentPortName = value;
-			}
+			get;  
+			set; 
 		}
 
+		/// <summary>
+		/// Gets or sets the baud rate.
+		/// </summary>
+		/// <value>The baud rate.</value>
 		public int BaudRate {
-			get {
-				return _sa.AgentBaudRate;
-			}
-			set {
-				_sa.AgentBaudRate = value;
-				_analyzer.SetAgent (_sa);
-			}
+			get;
+			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the parity.
+		/// </summary>
+		/// <value>The parity.</value>
 		public Parity Parity {
-			get {
-				return _sa.AgentParity;
-			}
-			set {
-				_sa.AgentParity = value;
-				_analyzer.SetAgent (_sa);
-			}
+			get;
+			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the data bits.
+		/// </summary>
+		/// <value>The data bits.</value>
 		public int DataBits {
-			get {
-				return _sa.AgentDataBits;
-			}
-			set {
-				_sa.AgentDataBits = value;
-				_analyzer.SetAgent (_sa);
-			}
+			get;
+			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the stop bits.
+		/// </summary>
+		/// <value>The stop bits.</value>
 		public StopBits StopBits {
-			get {
-				return _sa.AgentStopBits;
-			}
-			set {
-				_sa.AgentStopBits = value;
-				_analyzer.SetAgent (_sa);
-			}
+			get;
+			set;
 		}
 
+		/// <summary>
+		/// Gets or sets the proc.
+		/// </summary>
+		/// <value>The proc.</value>
 		public ByteListProc Proc {
 			get {
 				return _byteListProc;
@@ -85,9 +112,17 @@ namespace Windup.SerialTalker
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the line break.
+		/// </summary>
+		/// <value>The line break.</value>
 		public LineBreak LineBreak {
-			get;
-			set;
+			get {
+				return _lineBreak;
+			}
+			set {
+				_lineBreak = value;
+			}
 		}
 
 		/// <summary>
@@ -96,8 +131,11 @@ namespace Windup.SerialTalker
 		/// <param name="what">What.</param>
 		public bool Write (byte[] what)
 		{
-			var status = _sa.AgentWrite (what);
-			return 0 == status ? true : false;
+			if (IsOpen) {
+				var status = _sa.AgentWrite (what);
+				return 0 == status ? true : false;
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -114,7 +152,7 @@ namespace Windup.SerialTalker
 		/// Gets the serial ports.
 		/// </summary>
 		/// <returns>The serial ports.</returns>
-		public string[] GetSerialPorts ()
+		public static string[] GetSerialPorts ()
 		{
 			string[] allSerial = null;
 			try {
@@ -132,7 +170,7 @@ namespace Windup.SerialTalker
 		/// <returns><c>true</c>, if agent port was touched, <c>false</c> otherwise.</returns>
 		/// <param name="portName">Port name.</param>
 		/// <param name="baudRate">Baud rate.</param>
-		public static bool TouchAgentPort(string portName, int baudRate)
+		public static bool TouchSerialPort (string portName, int baudRate)
 		{
 			return SerialAgent.TouchAgentPort (portName, baudRate);
 		}
