@@ -105,10 +105,11 @@ namespace Windup.SerialTalker
         /// </summary>
         void ReadThread()
         {
+			var rxEventArgs = new DataRxEventArgs ();
             do {
                 if (_serial.BytesToRead > 0) {
-                    var result = (byte)_serial.ReadByte();
-                    DataRxEvent(this, new DataRxEventArgs(result));
+					rxEventArgs.Data = (byte)_serial.ReadByte();
+					DataRxEvent(this, rxEventArgs);
                 } else {
                     Thread.Sleep(10);
                 }
