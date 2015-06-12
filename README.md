@@ -34,6 +34,8 @@ var talker = new Talker () {
 };
 ````
 
+you can also use Parity, DataBits, StopBits to initlize talker.
+
 open talker if it's not opened.
 ```C#
 if (!talker.IsOpen) {
