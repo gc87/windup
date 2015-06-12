@@ -1,9 +1,8 @@
 Windup
 ======
 
-Serial port access library on c#. 
-
 ###Introduction
+* Serial port access library on c#. 
 
 ###Quickstart
 >Get all serial port name.
