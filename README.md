@@ -5,20 +5,17 @@ Windup
 * Serial port access library on c#. 
 
 ###Quickstart
->Get all serial port name.
-
+>get all serial port name.
 ```C#
 string[] portNames = GetSerialPorts ();
 ````
 
->Test a serial port is busy.
-
+>test a serial port is busy.
 ```C#
 var isBusy = Talker.TouchSerialPort ("COM3", 9600)
 ````
 
->Create a instance of Talker.
-
+>create a instance of Talker.
 ```C#
 var talker = new Talker () {
 	PortName = "COM3",
@@ -37,24 +34,23 @@ var talker = new Talker () {
 };
 ````
 
->Open talker if it's not opened.
-
+>open talker if it's not opened.
 ```C#
 if (!talker.IsOpen) {
 	talker.Open (); 
 }
 ````
 
->Write byte data to serialport.
-
+>write byte data to serialport.
 ```C#
 talker.Write (new byte[] { 10, 12, 11, 17, 18 });
 ````
 
->Close talker.
-
+>close talker.
 ```C#
 var isSuccessed = talker.Close();
 ````
 	
 ###License
+Copyright 2009–2015 gaoc and contributors
+MIT License (enclosed)
