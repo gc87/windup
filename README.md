@@ -36,6 +36,22 @@ var talker = new Talker () {
 
 you can also use Parity, DataBits, StopBits to initlize talker.
 
+linebreak type: "nt" -> '\r\n'; "linux" -> '\n'; "mac" -> '\r'; "length" -> you must initializing another property name is Length like this 
+```C#
+LineBreak = new LineBreak () {
+		Type = "length",
+		Length = 100
+	},
+````
+
+"char" -> you must initializing another property name is Char like this
+```C#
+LineBreak = new LineBreak () {
+		Type = "char",
+		Char = 'e'
+	},
+````
+
 open talker if it's not opened.
 ```C#
 if (!talker.IsOpen) {
