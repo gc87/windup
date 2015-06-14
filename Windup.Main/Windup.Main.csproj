@@ -41,4 +41,10 @@
       <Name>Windup.SerialTalker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ArduinoTest\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ArduinoTest\serial.ino" />
+  </ItemGroup>
 </Project>
