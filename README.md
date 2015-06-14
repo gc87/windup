@@ -38,7 +38,7 @@ you can also use Parity, DataBits, StopBits to initlize talker.
 
 linebreak type: "nt" -> '\r\n'; "linux" -> '\n'; "mac" -> '\r'; "length" -> you must initializing another property name is Length like this 
 ```C#
-LineBreak = new LineBreak () {
+var lineBreak = new LineBreak () {
 		Type = "length",
 		Length = 100
 	},
@@ -46,7 +46,7 @@ LineBreak = new LineBreak () {
 
 "char" -> you must initializing another property name is Char like this
 ```C#
-LineBreak = new LineBreak () {
+var lineBreak = new LineBreak () {
 		Type = "char",
 		Char = 'e'
 	},
