@@ -46,5 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Arduino\Bluetooth.ino" />
+    <None Include="Arduino\master.jpg" />
+    <None Include="Arduino\slave.png" />
   </ItemGroup>
 </Project>
