@@ -43,10 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Arduino\" />
+    <Folder Include="Arduino\Host0\" />
+    <Folder Include="Arduino\Host1\" />
+    <Folder Include="Arduino\Sensor0\" />
+    <Folder Include="Arduino\Sersor1\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Arduino\aJsonTest\aJsonTest.ino" />
     <None Include="Arduino\Host\Host.ino" />
     <None Include="Arduino\Sensor\Sensor.ino" />
+    <None Include="Arduino\Host0\Host0.ino" />
+    <None Include="Arduino\Host1\Host1.ino" />
+    <None Include="Arduino\Sensor0\Sensor0.ino" />
+    <None Include="Arduino\Sersor1\Sersor1.ino" />
   </ItemGroup>
 </Project>
