@@ -68,6 +68,10 @@ close talker.
 ```C#
 var isSuccessed = talker.Close();
 ````
+
+### Screenshot
+![](Bluetooth/Arduino/master.jpg)
+![](Bluetooth/Arduino/slave.png)
 	
 ### License
 Copyright 2009–2015 gaoc and contributors
